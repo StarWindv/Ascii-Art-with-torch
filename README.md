@@ -2,11 +2,19 @@
 
 将图片/视频实时转换为高性能ASCII艺术，支持终端预览与文件导出，提供GPU加速和增强模式！
 
-![micropng](demo/herta2_ascii.png)
-
-![herta2asciipng](demo/details-1.png)
-
 ---
+<table>
+  <tr>
+    <td><img src="demo/herta2_ascii.png" width="100%" /></td>
+    <td><img src="demo/details-1.png" width="100%" /></td>
+  </tr>
+</table>
+
+<table >
+  <tr>
+    <td align="center"><img src="demo/generating.gif" width="75%" /></td>
+  </tr>
+</table>
 
 ## ✨ 功能亮点
 
