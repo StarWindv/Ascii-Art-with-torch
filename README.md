@@ -60,11 +60,12 @@ python stv_ascii.py [输入路径] [选项]
   ```bash
   python stv_ascii.py input.mp4 -v -e
   ```
+  注意，这个功能受电脑性能和终端字体大小影响，当清晰度过高时，将无法保证播放流畅。
   
-3. **导出ASCII视频**
+3. **高质量导出ASCII视频**
   
   ```bash
-  python stv_ascii.py input.mp4 -vx -o output.mp4
+  python stv_ascii.py input.mp4 -v -x -e -o output.mp4
   ```
   
 
