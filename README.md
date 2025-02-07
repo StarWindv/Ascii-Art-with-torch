@@ -2,9 +2,23 @@
 
 将图片/视频实时转换为高性能ASCII艺术，支持终端预览与文件导出，提供GPU加速和增强模式！
 
-![示例图片](demo/details-1.png "图片转ASCII示例") 
-![示例图片](demo/coarse.png "图片转ASCII示例") 
-![示例图片](demo/herta2_ascii.png "图片转ASCII示例") 
+<div style="display: flex; justify-content: space-between; gap: 10px; margin: 20px 0;">
+  <img 
+    src="demo/details-1.png" 
+    style="flex: 1; height: auto; object-fit: contain; min-width: 0;" 
+    alt="细节效果"
+  >
+  <img 
+    src="demo/coarse.png" 
+    style="flex: 1; height: auto; object-fit: contain; min-width: 0;" 
+    alt="粗略效果"
+  >
+  <img 
+    src="demo/herta2_ascii.png" 
+    style="flex: 1; height: auto; object-fit: contain; min-width: 0;" 
+    alt="Herta字符画"
+  >
+</div>
 ![示例GIF](demo/demo_video.gif "视频转ASCII示例")
 
 ---
