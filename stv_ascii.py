@@ -34,8 +34,8 @@ try:
     import torch
     import torchvision.transforms as transforms
     HAS_TORCH = True
-except Exception as e:
-    print(f"\033[31m由于问题 \033[96m{e}\033[31m\n\t而无法使用GPU加速\033[0m")
+except ImportError:
+    print(f"\033[31m由于无法导入\033[96mtorch/torchvision\033[31m\n而无法使用GPU加速\033[0m")
     HAS_TORCH = False
 
 # 全局配置
