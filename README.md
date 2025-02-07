@@ -4,8 +4,6 @@
 
 ![micropng](demo/herta2_ascii.png)
 
-![coarsepng](demo/coarse.png)
-
 ![herta2asciipng](demo/details-1.png)
 
 ---
