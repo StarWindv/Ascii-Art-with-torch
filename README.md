@@ -62,6 +62,12 @@ python stv_ascii.py [输入路径] [选项]
   ```bash
   python stv_ascii.py input.jpg -e -g
   ```
+  注意，此模式下会自动生成一份`filename_ansi.txt`，存储在`ASCII_PIC/ANSI`下，你可以使用`with open`方法将它输出到想要的地方，比如终端。
+  <table >
+  <tr>
+    <td align="center"><img src="demo/ansi_test.png" width="75%" /></td>
+  </tr>
+</table>
   
 2. **视频实时播放**
   
