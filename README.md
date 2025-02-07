@@ -6,7 +6,7 @@
 
 ![coarsepng](demo/coarse.png)
 
-![herta2asciipng](demo/datails-1.png)
+![herta2asciipng](demo/details-1.png)
 
 ---
 
