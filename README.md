@@ -60,7 +60,7 @@ python stv_ascii.py [输入路径] [选项]
 1. **图片转ASCII**（终端预览+保存）
   
   ```bash
-  python stv_ascii.py input.jpg -e -g
+  python stv_ascii.py input.jpg -g
   ```
   注意，此模式下会自动生成一份`filename_ansi.txt`，存储在`ASCII_PIC/ANSI`下，你可以使用`with open`方法将它输出到想要的地方，比如终端。
   <table >
