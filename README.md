@@ -2,7 +2,7 @@
 
 将图片/视频实时转换为高性能ASCII艺术，支持终端预览与文件导出，提供GPU加速和增强模式！
 
-![示例图片](demo/demo_image.png "图片转ASCII示例")  
+![示例图片](demo/details-1.png "图片转ASCII示例")  
 ![示例GIF](demo/demo_video.gif "视频转ASCII示例")
 
 ---
