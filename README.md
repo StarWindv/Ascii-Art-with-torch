@@ -68,6 +68,7 @@ python stv_ascii.py [输入路径] [选项]
   python stv_ascii.py input.mp4 -v -x -e -o output.mp4
   ```
   注意，当处在导出模式时将不会播放艺术帧。
+  注意，当导出开始后，请不要调整当前标签页的字体大小。
 
 ---
 
