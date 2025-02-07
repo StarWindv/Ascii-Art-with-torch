@@ -80,10 +80,14 @@ def rgb_to_ansi(r, g, b, background=False):
     """0-1: RGB转ANSI颜色代码"""
     return f"\033[{48 if background else 38};2;{r};{g};{b}m"
 
-def convert_frame(image, enhanced=False):
-    """核心转换逻辑，支持两种模式"""
-    cols, rows = get_terminal_size()
-    target_size = (cols, rows*2)  # 每字符占两像素高度
+def convert_frame(image, enhanced=False, fixed_size=None):
+    """核心转换逻辑，支持固定尺寸"""
+    if fixed_size:
+        cols, rows = fixed_size[0], fixed_size[1]
+    else:
+        cols, rows = get_terminal_size()
+    target_size = (cols, rows*2)  # 使用传入的固定尺寸
+
     
     # 3-2: 增强模式预处理
     if enhanced:
@@ -114,6 +118,14 @@ def convert_frame(image, enhanced=False):
         output.append("".join(line))
     return "\n".join(output), resized
 
+def save_ascii_text(ascii_art, path):
+    """新增：保存ANSI文本文件"""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as f:
+        # 每行末尾添加颜色重置代码
+        processed = "\n".join([line + "\033[0m" for line in ascii_art.split("\n")])
+        f.write(processed)
+        
 def save_ascii_image(image, path):
     """2-1/2-2: 保存ASCII图片"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -143,7 +155,14 @@ def handle_image(input_path, output_path=None, enhanced=False, use_gpu=False):
         output_path = os.path.join(output_dir, filename)
     
     save_ascii_image(resized_img, output_path)
-    print(f"已保存到: {output_path}")
+    print(f"已保存图片到: {output_path}")
+
+    # 新增：保存ANSI文本文件
+    text_output_dir = os.path.join(os.getcwd(), DEFAULT_OUTPUT_DIR, "ANSI")
+    text_filename = f"{os.path.splitext(os.path.basename(input_path))[0]}_ansi.txt"
+    text_output_path = os.path.join(text_output_dir, text_filename)
+    save_ascii_text(ascii_art, text_output_path)
+    print(f"已保存ASCII文本到: {text_output_path}")
 
 class VideoProcessor:
     """视频处理核心类"""
@@ -179,27 +198,31 @@ class VideoProcessor:
 
 def handle_video(input_path, enhanced=False, export=False, output_path=None, use_gpu=False):
     """视频处理入口"""
+    # 在函数开始时获取并固定终端尺寸
+    terminal_size = get_terminal_size()
+    terminal_cols, terminal_rows = terminal_size[0], terminal_size[1]
+    target_size = (terminal_cols, terminal_rows * 2)  # 固定初始尺寸
+
     processor = VideoProcessor(input_path, enhanced, use_gpu)
     
     if export:
-        # 视频导出模式
         if output_path is None:
             output_dir = os.path.join(os.getcwd(), DEFAULT_OUTPUT_DIR)
             filename = f"{os.path.splitext(os.path.basename(input_path))[0]}_ascii.mp4"
             output_path = os.path.join(output_dir, filename)
         
-        # 视频写入器
+        # 使用固定的初始尺寸创建视频写入器
         writer = cv2.VideoWriter(
             output_path, 
             cv2.VideoWriter_fourcc(*'mp4v'), 
             processor.fps, 
-            (get_terminal_size()[0], get_terminal_size()[1]*2)
+            (terminal_cols, terminal_rows * 2)  # 固定尺寸
         )
         
-        # 进度条
         pbar = tqdm(total=processor.total_frames, desc="转换进度")
         for frame in processor:
-            _, resized = convert_frame(frame, enhanced)
+            # 将固定尺寸传递给convert_frame
+            ascii_art, resized = convert_frame(frame, enhanced, fixed_size=(terminal_cols, terminal_rows))
             writer.write(cv2.cvtColor(np.array(resized), cv2.COLOR_RGB2BGR))
             pbar.update(1)
         writer.release()
