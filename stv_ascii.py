@@ -33,9 +33,11 @@ import numpy as np
 try:
     import torch
     import torchvision.transforms as transforms
+    global HAS_TORCH
+        
     HAS_TORCH = True
 except ImportError:
-    print(f"\033[31m由于无法导入\033[96mtorch/torchvision\033[31m\n而无法使用GPU加速\033[0m")
+    # print(f"\033[31m由于无法导入\033[96mtorch/torchvision\033[31m\n而无法使用GPU加速\033[0m")
     HAS_TORCH = False
 
 # 全局配置
@@ -43,8 +45,16 @@ ENHANCED_CHARS = "@%#*+=-:. "  # 增强模式字符集
 DEFAULT_CHAR = "▄"             # 默认模式字符
 DEFAULT_OUTPUT_DIR = "ASCII_PIC"
 
+
+def is_ch():
+    import locale
+    # locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+    lang, _ = locale.getlocale()
+    if lang and 'Chinese' in lang:
+        return True
+    return False
+
 def check_cuda():
-    """A-1: 检测CUDA可用性"""
     if not HAS_TORCH:
         return False
     return torch.cuda.is_available()
@@ -134,7 +144,7 @@ def save_ascii_image(image, path):
 def handle_image(input_path, output_path=None, enhanced=False, use_gpu=False):
     """图片处理入口"""
     try:
-        img = Image.open(input_path)
+        img = Image.open(input_path).convert("RGB")
     except FileNotFoundError:
         print(f"文件未找到: {input_path}")
         return
@@ -248,13 +258,22 @@ def handle_video(input_path, enhanced=False, export=False, output_path=None, use
 
 def main():
     """命令行入口"""
-    parser = argparse.ArgumentParser(description="ASCII Art 转换工具")
-    parser.add_argument("input", help="输入文件路径")
-    parser.add_argument("-o", "--output", help="输出路径")
-    parser.add_argument("-v", "--video", action="store_true", help="视频模式")
-    parser.add_argument("-e", "--enhanced", action="store_true", help="增强模式")
-    parser.add_argument("-x", "--export", action="store_true", help="导出视频文件")
-    parser.add_argument("-g", "--gpu", action="store_true", help="启用GPU加速")
+    if is_ch():
+        parser = argparse.ArgumentParser(description="星灿长风v & CLI-ASCII Art 生成器")
+        parser.add_argument("input", help="输入文件路径")
+        parser.add_argument("-o", "--output", help="输出路径")
+        parser.add_argument("-v", "--video", action="store_true", help="视频模式")
+        parser.add_argument("-e", "--enhanced", action="store_true", help="增强模式")
+        parser.add_argument("-x", "--export", action="store_true", help="导出视频文件")
+        parser.add_argument("-g", "--gpu", action="store_true", help="启用GPU加速")
+    else:
+        parser = argparse.ArgumentParser(description="StarWindv & CLI-ASCII Art Generator")
+        parser.add_argument("input", help="Input file path")
+        parser.add_argument("-o", "--output", help="Output path")
+        parser.add_argument("-v", "--video", action="store_true", help="Video mode")
+        parser.add_argument("-e", "--enhanced", action="store_true", help="Enhanced mode")
+        parser.add_argument("-x", "--export", action="store_true", help="Export video file")
+        parser.add_argument("-g", "--gpu", action="store_true", help="Enable GPU acceleration")
     
     args = parser.parse_args()
     
