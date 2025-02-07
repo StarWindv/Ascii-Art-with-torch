@@ -67,7 +67,7 @@ python stv_ascii.py [输入路径] [选项]
   ```bash
   python stv_ascii.py input.mp4 -v -x -e -o output.mp4
   ```
-  
+  注意，当处在导出模式时将不会播放艺术帧。
 
 ---
 
