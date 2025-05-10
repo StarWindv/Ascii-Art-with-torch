@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stv_ascii_art"
+version = "0.1.5"
+authors = [
+    { name = "星灿长风v(StarWindv)" },
+    { email = "starwindv.stv@gmail.com"}
+]
+description = "Ascii Art 生成工具"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.7"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Artistic Software"
+]
+dependencies = [
+    "tqdm",
+    "numpy",
+    "stv_utils",
+    "opencv-python",
+    "pillow",
+    "torch"
+]
+urls = { "Homepage" = "https://github.com/StarWindv/scraper_for_images/tree/package" }
+
+[project.scripts]
+stv_art = "stv_ascii_art.main:main"
+
+[tool.setuptools]
+license-files = []
