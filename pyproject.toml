@@ -31,7 +31,7 @@ dependencies = [
 urls = { "Homepage" = "https://github.com/StarWindv/scraper_for_images/tree/package" }
 
 [project.scripts]
-stv_art = "stv_ascii_art.main:main"
+saa = "stv_ascii_art.main:main"
 
 [tool.setuptools]
 license-files = []
