@@ -28,11 +28,13 @@
 
 ---
 
-## 🛠️ 安装依赖
+## 🛠️ 安装
 
 ```bash
-pip install pillow opencv-python numpy tqdm
-pip install torch torchvision
+git clone https://github.com/StarWindv/Ascii-Art-with-torch
+cd Ascii-Art-with-torch
+pip install pillow opencv-python numpy tqdm torch torchvision
+pip install .
 ```
 
 ---
@@ -42,7 +44,7 @@ pip install torch torchvision
 ### 基本命令
 
 ```bash
-python stv_ascii.py [输入路径] [选项]
+saa [输入路径] [选项]
 ```
 
 ### 选项说明
@@ -60,7 +62,7 @@ python stv_ascii.py [输入路径] [选项]
 1. **图片转ASCII**（终端预览+保存）
   
   ```bash
-  python stv_ascii.py input.jpg -g
+  saa input.jpg -g
   ```
   注意，此模式下会自动生成一份`filename_ansi.txt`，存储在`ASCII_PIC/ANSI`下，你可以使用`with open`方法将它输出到想要的地方，比如终端。
   <table >
@@ -72,7 +74,7 @@ python stv_ascii.py [输入路径] [选项]
 2. **视频实时播放**
   
   ```bash
-  python stv_ascii.py input.mp4 -v -e
+  saa input.mp4 -v -e
   ```
   注意，这个功能受电脑性能和终端字体大小影响，当清晰度过高时，将无法保证播放流畅。
   
