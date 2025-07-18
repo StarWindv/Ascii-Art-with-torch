@@ -41,7 +41,7 @@ class CustomHelpFormatter(argparse.HelpFormatter):
 
 def stv_parse():
     pt = parse_text(check=True)
-    from stv_ascii.utils.change_text import beautiful_parse_text
+    from stv_ascii_art.utils.change_text import beautiful_parse_text
 
     bpt = beautiful_parse_text(check = True)
 
