@@ -23,7 +23,7 @@ classifiers = [
 dependencies = [
     "tqdm",
     "numpy",
-    "stv_utils",
+    "stv_utils==0.0.6",
     "opencv-python",
     "pillow",
     "torch"
@@ -35,3 +35,4 @@ saa = "stv_ascii_art.main:main"
 
 [tool.setuptools]
 license-files = []
+
